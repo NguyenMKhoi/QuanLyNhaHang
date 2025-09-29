@@ -1,0 +1,127 @@
+﻿<Window x:Class="Doancanhan.QuanLyNguyenLieu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Doancanhan"
+        mc:Ignorable="d"
+        Title="QuanLyNguyenLieu" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="6"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="MinWidth" Value="80"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <StackPanel Grid.Column="0" Background="#e9f4fb" Margin="12">
+            <TextBlock Text="Hệ thống quản lý" FontSize="18" FontWeight="Bold" Margin="4"/>
+            <Separator Margin="6"/>
+            <Button Name="BtnInventory" Click="BtnInventory_Click" Content="Quản lý nguyên liệu / kho" HorizontalAlignment="Stretch"/>
+            <Button Name="BtnOrders" Click="BtnOrders_Click" Content="Quản lý đơn hàng" HorizontalAlignment="Stretch"/>
+
+            <StackPanel Margin="0,18,0,0">
+                <TextBlock Text="Tùy chọn nhanh" FontWeight="Bold" Margin="4"/>
+                <WrapPanel>
+                    <Button Name="BtnAddSample" Click="BtnAddSample_Click">Thêm dữ liệu mẫu</Button>
+                    <Button Name="BtnExport" Click="BtnExport_Click">Xuất CSV</Button>
+                </WrapPanel>
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Bottom" Margin="0,24,0,0">
+                <TextBlock Text="Phiên: Admin" FontStyle="Italic"/>
+                <Button Click="BtnExit_Click" Content="Đăng xuất"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Main area -->
+        <DockPanel Grid.Column="1">
+            <!-- Header -->
+            <Grid DockPanel.Dock="Top" Height="72" Background="#f7fbff" Margin="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="300"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Quản lý nguyên liệu / kho &amp; đơn hàng" FontSize="20" FontWeight="Bold"/>
+                    <TextBlock Text="Theo dõi tồn kho, nhập - xuất nguyên liệu, và quản lý trạng thái đơn hàng"
+                               FontSize="12" Foreground="Gray"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal"
+                            HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <TextBox Name="TxtSearch" Width="200" Height="28" KeyDown="TxtSearch_KeyDown"/>
+                    <Button Click="BtnSearch_Click">Tìm</Button>
+                </StackPanel>
+            </Grid>
+
+            <!-- Nội dung chính -->
+            <Grid DockPanel.Dock="Top" Margin="12">
+                <!-- Inventory View -->
+                <Grid x:Name="InventoryView" Visibility="Visible">
+                    <StackPanel>
+                        <WrapPanel>
+                            <Button Name="BtnNewProduct" Click="BtnNewProduct_Click">Thêm</Button>
+                            <Button Name="BtnEditProduct" Click="BtnEditProduct_Click">Sửa</Button>
+                            <Button Name="BtnDeleteProduct" Click="BtnDeleteProduct_Click">Xóa</Button>
+                            <Button Name="BtnImport" Click="BtnImport_Click">Nhập khẩu</Button>
+                        </WrapPanel>
+
+                        <DataGrid x:Name="DgInventory"
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                  IsReadOnly="True"
+                                  Height="400">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Mã" Binding="{Binding Id}" Width="100"/>
+                                <DataGridTextColumn Header="Tên nguyên liệu" Binding="{Binding Name}" Width="*"/>
+                                <DataGridTextColumn Header="Số lượng" Binding="{Binding Quantity}" Width="120"/>
+                                <DataGridTextColumn Header="Đơn vị" Binding="{Binding Unit}" Width="100"/>
+                                <DataGridTextColumn Header="Ghi chú" Binding="{Binding Note}" Width="200"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Orders View -->
+                <Grid x:Name="OrdersView" Visibility="Collapsed">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                            <TextBlock Text="Trạng thái:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                            <ComboBox x:Name="CboOrderStatus"
+                                      Width="200"
+                                      SelectionChanged="CboOrderStatus_SelectionChanged">
+                                <ComboBoxItem Content="Tất cả" IsSelected="True"/>
+                                <ComboBoxItem Content="Chờ"/>
+                                <ComboBoxItem Content="Đang xử lý"/>
+                                <ComboBoxItem Content="Đã giao"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <DataGrid x:Name="DgOrders"
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                  IsReadOnly="True"
+                                  Height="400">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Mã đơn" Binding="{Binding Id}" />
+                                <DataGridTextColumn Header="Khách hàng" Binding="{Binding Customer}" />
+                                <DataGridTextColumn Header="Tổng tiền" Binding="{Binding Total}" />
+                                <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" />
+                                <DataGridTextColumn Header="Ngày" Binding="{Binding Date}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>

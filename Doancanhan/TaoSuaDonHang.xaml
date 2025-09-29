@@ -1,0 +1,49 @@
+﻿<Window x:Class="Doancanhan.TaoSuaDonHang"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Tạo / Sửa Đơn Hàng" Height="700" Width="1100" WindowStartupLocation="CenterOwner" Loaded="Window_Loaded">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Cột trái: Danh sách món ăn từ thực đơn -->
+        <GroupBox Grid.Column="0" Header="Thực đơn (Double-click để thêm món)" Margin="0,0,10,0" FontWeight="SemiBold">
+            <DataGrid x:Name="dgMonAn" IsReadOnly="True" SelectionMode="Single" MouseDoubleClick="DgMonAn_MouseDoubleClick" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Tên Món" Binding="{Binding TenMonAn}" Width="*"/>
+                    <DataGridTextColumn Header="Loại Món" Binding="{Binding LoaiMonAn.TenLoai}" Width="120"/>
+                    <DataGridTextColumn Header="Giá" Binding="{Binding Gia, StringFormat='N0'}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <!-- Cột phải: Chi tiết đơn hàng hiện tại -->
+        <GroupBox Grid.Column="1" Header="Đơn hàng hiện tại" FontWeight="SemiBold">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="lblThongTinDonHang" Grid.Row="0" Margin="5" FontSize="16"/>
+
+                <DataGrid x:Name="dgChiTietDonHang" Grid.Row="1" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Tên Món" Binding="{Binding MonAn.TenMonAn}" Width="*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="SL" Binding="{Binding SoLuong, UpdateSourceTrigger=PropertyChanged}" Width="40"/>
+                        <DataGridTextColumn Header="Thành Tiền" Binding="{Binding ThanhTien, StringFormat='N0'}" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <StackPanel Grid.Row="2" Margin="0,10,0,0">
+                    <TextBlock Text="Tổng cộng:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Right"/>
+                    <TextBlock x:Name="txtTongTien" Text="0 ₫" FontSize="28" FontWeight="Bold" Foreground="DarkRed" HorizontalAlignment="Right"/>
+                    <Button Content="Lưu Đơn Hàng" Margin="0,15,0,0" Height="40" Background="DodgerBlue" Foreground="White" Click="BtnLuu_Click"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

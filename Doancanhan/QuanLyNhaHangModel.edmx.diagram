@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0df33bd209a24f47823bbc09b6ca025c" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="RestaurantDBModel.ChiTietDonHang" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestaurantDBModel.DatBan" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestaurantDBModel.DonHang" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestaurantDBModel.LoaiMonAn" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestaurantDBModel.LoaiNguoiDung" Width="1.5" PointX="5.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestaurantDBModel.MonAn" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestaurantDBModel.NguoiDung" Width="1.5" PointX="8" PointY="4.875" IsExpanded="true" />
+        <AssociationConnector Association="RestaurantDBModel.FK__ChiTietDo__MaDon__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="RestaurantDBModel.FK__ChiTietDo__MaMon__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="RestaurantDBModel.FK__DonHang__MaDatBa__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="RestaurantDBModel.FK__MonAn__MaLoai__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="RestaurantDBModel.FK__NguoiDung__MaLoa__3A81B327" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="RestaurantDBModel.ThanhToan" Width="1.5" PointX="5.25" PointY="8.125" />
+        <AssociationConnector Association="RestaurantDBModel.FK__ThanhToan__MaDon__5EBF139D" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

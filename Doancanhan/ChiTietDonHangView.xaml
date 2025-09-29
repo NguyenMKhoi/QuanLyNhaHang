@@ -1,0 +1,63 @@
+﻿<Window x:Class="Doancanhan.ChiTietDonHangView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Chi Tiết Đơn Hàng" Height="550" Width="600"
+        WindowStartupLocation="CenterScreen" 
+        Background="#F4F6F9"
+        Loaded="Window_Loaded">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Tiêu đề -->
+        <TextBlock Grid.Row="0" x:Name="lblTieuDe" Text="CHI TIẾT ĐƠN HÀNG #" 
+                   FontSize="22" FontWeight="Bold" Foreground="#2C3E50" 
+                   Margin="0,0,0,15"/>
+
+        <!-- Thông tin chung của đơn hàng -->
+        <Border Grid.Row="1" Background="White" CornerRadius="5" Padding="15" Margin="0,0,0,15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Khách hàng:" FontWeight="SemiBold" Margin="5"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="lblTenKhachHang" Text="..." Margin="5"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Thời gian tạo:" FontWeight="SemiBold" Margin="5"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="lblThoiGianTao" Text="..." Margin="5"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Trạng thái:" FontWeight="SemiBold" Margin="5"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="lblTrangThai" Text="..." FontWeight="Bold" Margin="5"/>
+            </Grid>
+        </Border>
+
+        <!-- Bảng danh sách các món ăn -->
+        <DataGrid Grid.Row="2" x:Name="dgChiTietMonAn" AutoGenerateColumns="False" 
+                  IsReadOnly="True" CanUserAddRows="False" AlternatingRowBackground="#EAF2F8">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Tên Món Ăn" Binding="{Binding MonAn.TenMonAn}" Width="*"/>
+                <DataGridTextColumn Header="Số Lượng" Binding="{Binding SoLuong}" Width="80"/>
+                <DataGridTextColumn Header="Đơn Giá" Binding="{Binding MonAn.Gia, StringFormat='N0', ConverterCulture='vi-VN'}" Width="120"/>
+                <DataGridTextColumn Header="Thành Tiền" Binding="{Binding ThanhTien, StringFormat='N0', ConverterCulture='vi-VN'}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Tổng tiền -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+            <TextBlock Text="Tổng Cộng:" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"/>
+            <TextBlock x:Name="lblTongCong" Text="0 VNĐ" FontSize="20" FontWeight="Bold" 
+                       Foreground="#E74C3C" VerticalAlignment="Center" Margin="10,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

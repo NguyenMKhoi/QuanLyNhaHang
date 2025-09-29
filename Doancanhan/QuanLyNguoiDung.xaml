@@ -1,0 +1,30 @@
+﻿<Window x:Class="Doancanhan.QuanLyNguoiDung"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Quản Lý Người Dùng" Height="500" Width="800"
+        WindowStartupLocation="CenterOwner" Loaded="Window_Loaded">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+            <Button x:Name="btnThem" Content="Thêm Mới" Width="100" Margin="0,0,10,0" Click="BtnThem_Click"/>
+            <Button x:Name="btnSua" Content="Sửa" Width="100" Margin="0,0,10,0" Click="BtnSua_Click"/>
+            <Button x:Name="btnKhoaMo" Content="Khóa / Mở" Width="100" Margin="0,0,10,0" Click="BtnKhoaMo_Click"/>
+            <Button x:Name="btnXoa" Content="Xóa" Width="100" Background="IndianRed" Foreground="White" Click="BtnXoa_Click"/>
+        </StackPanel>
+
+        <DataGrid x:Name="dgNguoiDung" Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Tên đăng nhập" Binding="{Binding TenDangNhap}" Width="*"/>
+                <DataGridTextColumn Header="Loại người dùng" Binding="{Binding LoaiNguoiDung.TenLoai}" Width="150"/>
+
+                <!-- ĐÃ SỬA LỖI Ở ĐÂY: Dùng CheckBox thay cho Converter -->
+                <DataGridCheckBoxColumn Header="Hoạt động" Binding="{Binding HoatDong}" Width="120"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

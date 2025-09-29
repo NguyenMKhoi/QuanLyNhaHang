@@ -1,0 +1,29 @@
+﻿<Window x:Class="Doancanhan.QuanLyDatBan"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Quản Lý Đặt Bàn" Height="600" Width="900" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+            <Button x:Name="btnTaoDonHang" Content="Tạo / Xem Đơn hàng" Width="150" Margin="0,0,10,0" Background="ForestGreen" Foreground="White" FontWeight="Bold" Click="BtnTaoDonHang_Click"/>
+            <Button x:Name="btnThem" Content="Thêm Đặt Bàn" Width="120" Margin="0,0,10,0" Click="BtnThem_Click"/>
+            <Button x:Name="btnSua" Content="Sửa Đặt Bàn" Width="120" Margin="0,0,10,0" Click="BtnSua_Click"/>
+            <Button x:Name="btnXoa" Content="Xóa Đặt Bàn" Width="120" Background="IndianRed" Foreground="White" Click="BtnXoa_Click"/>
+        </StackPanel>
+
+        <DataGrid x:Name="dgDatBan" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Mã ĐB" Binding="{Binding MaDatBan}" Width="60"/>
+                <DataGridTextColumn Header="Khách Hàng" Binding="{Binding TenKhachHang}" Width="*"/>
+                <DataGridTextColumn Header="Số Điện Thoại" Binding="{Binding SoDienThoai}" Width="120"/>
+                <DataGridTextColumn Header="Thời Gian Đặt" Binding="{Binding ThoiGianDat, StringFormat='HH:mm dd/MM/yyyy'}" Width="160"/>
+                <DataGridTextColumn Header="Số Khách" Binding="{Binding SoKhach}" Width="80"/>
+                <DataGridTextColumn Header="Trạng Thái" Binding="{Binding TrangThai}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

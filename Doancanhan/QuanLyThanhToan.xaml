@@ -1,0 +1,168 @@
+﻿<Window x:Class="Doancanhan.QuanLyThanhToan"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Doancanhan"
+        mc:Ignorable="d"
+        Title="QuanLyThanhToan" Height="450" Width="800">
+    <Grid Margin="12">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+
+        <TextBlock Grid.ColumnSpan="2" Text="Quản lý thanh toán" FontSize="22" FontWeight="Bold" />
+
+
+        <Border Grid.Row="1" Grid.Column="0" Margin="0,12,12,0" Padding="10" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="6">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Tìm kiếm:" VerticalAlignment="Center" Margin="0,0,6,0" />
+                    <TextBox x:Name="tbSearch" Width="260" Height="28" VerticalAlignment="Center" Margin="0,0,8,0" />
+                    <Button x:Name="btnSearch" Content="Tìm" Width="80" Height="28" Margin="0,0,12,0" />
+
+                    <TextBlock Text="Trạng thái:" VerticalAlignment="Center" Margin="0,0,6,0" />
+                    <ComboBox x:Name="cbStatus" Width="160" Height="28" VerticalAlignment="Center" Margin="0,0,12,0">
+                        <ComboBoxItem Content="Tất cả" />
+                        <ComboBoxItem Content="Chờ" />
+                        <ComboBoxItem Content="Đang xử lý" />
+                        <ComboBoxItem Content="Đã thanh toán" />
+                        <ComboBoxItem Content="Đã hủy" />
+                    </ComboBox>
+
+                    <TextBlock Text="Từ ngày:" VerticalAlignment="Center" Margin="0,0,6,0" />
+                    <DatePicker x:Name="dpFrom" Width="140" Margin="0,0,8,0" />
+                    <TextBlock Text="Đến:" VerticalAlignment="Center" Margin="0,0,6,0" />
+                    <DatePicker x:Name="dpTo" Width="140" Margin="0,0,12,0" />
+
+                    <Button x:Name="btnRefresh" Content="Làm mới" Width="100" Height="28" />
+                </StackPanel>
+
+
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <Border Padding="8" BorderBrush="#DDD" BorderThickness="1" CornerRadius="6" Margin="0,0,12,0">
+                        <StackPanel>
+                            <TextBlock Text="Tổng đơn" FontWeight="SemiBold" />
+                            <TextBlock x:Name="tbTotalOrders" Text="0" FontSize="16" FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
+                    <Border Padding="8" BorderBrush="#DDD" BorderThickness="1" CornerRadius="6" Margin="0,0,12,0">
+                        <StackPanel>
+                            <TextBlock Text="Doanh thu" FontWeight="SemiBold" />
+                            <TextBlock x:Name="tbTotalRevenue" Text="0" FontSize="16" FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
+                    <Border Padding="8" BorderBrush="#DDD" BorderThickness="1" CornerRadius="6">
+                        <StackPanel>
+                            <TextBlock Text="Chờ thanh toán" FontWeight="SemiBold" />
+                            <TextBlock x:Name="tbPending" Text="0" FontSize="16" FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+
+        <Border Grid.Row="1" Grid.Column="0" Margin="0,110,12,0" Padding="6" BorderBrush="#EAEAEA" BorderThickness="1" CornerRadius="6">
+            <StackPanel>
+                <TextBlock Text="Danh sách đơn hàng" FontWeight="SemiBold" />
+                <DataGrid x:Name="dgPayments" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="460" Margin="0,8,0,0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã đơn" Binding="{Binding OrderId}" Width="120" />
+                        <DataGridTextColumn Header="Khách hàng" Binding="{Binding Customer}" Width="*" />
+                        <DataGridTextColumn Header="Tổng tiền" Binding="{Binding TotalAmount}" Width="140" />
+                        <DataGridTextColumn Header="Phương thức" Binding="{Binding PaymentMethod}" Width="140" />
+                        <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="120" />
+                        <DataGridTextColumn Header="Ngày" Binding="{Binding Date}" Width="140" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+                    <Button x:Name="btnExport" Content="Xuất CSV/Excel" Width="120" Margin="0,0,8,0" />
+                    <Button x:Name="btnPrintList" Content="In danh sách" Width="100" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+
+        <Border Grid.Row="1" Grid.Column="1" Margin="0,12,0,0" Padding="12" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="6">
+            <StackPanel>
+                <TextBlock Text="Chi tiết đơn hàng" FontSize="16" FontWeight="SemiBold" />
+
+                <Grid Margin="0,8,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Mã đơn:" Grid.Column="0" VerticalAlignment="Center" />
+                    <TextBlock x:Name="tbOrderId" Text="-" Grid.Column="1" VerticalAlignment="Center" FontWeight="Bold" />
+
+                    <TextBlock Text="Khách hàng:" Grid.Column="0" VerticalAlignment="Center" Margin="0,28,0,0" />
+                    <TextBlock x:Name="tbCustomer" Text="-" Grid.Column="1" VerticalAlignment="Center" Margin="0,28,0,0" />
+
+                    <TextBlock Text="Ngày:" Grid.Column="0" VerticalAlignment="Center" Margin="0,56,0,0" />
+                    <TextBlock x:Name="tbDate" Text="-" Grid.Column="1" VerticalAlignment="Center" Margin="0,56,0,0" />
+                </Grid>
+
+
+                <TextBlock Text="Chi tiết mặt hàng" FontWeight="SemiBold" Margin="0,12,0,6" />
+                <DataGrid x:Name="dgOrderItems" AutoGenerateColumns="False" IsReadOnly="True" Height="180">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Món" Binding="{Binding Name}" Width="*" />
+                        <DataGridTextColumn Header="SL" Binding="{Binding Qty}" Width="60" />
+                        <DataGridTextColumn Header="Giá" Binding="{Binding Price}" Width="100" />
+                        <DataGridTextColumn Header="Thành tiền" Binding="{Binding Total}" Width="120" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+
+                <StackPanel Margin="0,10,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="140" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Tạm tính:" Grid.Column="0" HorizontalAlignment="Right" />
+                        <TextBlock x:Name="tbSubtotal" Text="0" Grid.Column="1" HorizontalAlignment="Right" FontWeight="Bold" />
+
+                        <TextBlock Text="Phí dịch vụ:" Grid.Column="0" HorizontalAlignment="Right" Margin="0,24,0,0" />
+                        <TextBlock x:Name="tbServiceFee" Text="0" Grid.Column="1" HorizontalAlignment="Right" Margin="0,24,0,0" />
+
+                        <TextBlock Text="Giảm giá:" Grid.Column="0" HorizontalAlignment="Right" Margin="0,48,0,0" />
+                        <TextBlock x:Name="tbDiscount" Text="0" Grid.Column="1" HorizontalAlignment="Right" Margin="0,48,0,0" />
+
+                        <TextBlock Text="Tổng cộng:" Grid.Column="0" HorizontalAlignment="Right" Margin="0,80,0,0" FontWeight="Bold" />
+                        <TextBlock x:Name="tbGrandTotal" Text="0" Grid.Column="1" HorizontalAlignment="Right" Margin="0,80,0,0" FontWeight="Bold" />
+                    </Grid>
+                </StackPanel>
+
+
+                <StackPanel Orientation="Vertical" Margin="0,12,0,0">
+                    <TextBlock Text="Phương thức thanh toán" />
+                    <ComboBox x:Name="cbPaymentMethod" Width="220" Margin="0,6,0,0">
+                        <ComboBoxItem Content="Tiền mặt" />
+                        <ComboBoxItem Content="Thẻ tín dụng" />
+                        <ComboBoxItem Content="Chuyển khoản" />
+                        <ComboBoxItem Content="Ví điện tử" />
+                    </ComboBox>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+                        <Button x:Name="btnCancel" Content="Hủy" Width="90" Margin="0,0,8,0" />
+                        <Button x:Name="btnPrintInvoice" Content="In hoá đơn" Width="110" Margin="0,0,8,0" />
+                        <Button x:Name="btnPay" Content="Thanh toán" Width="120" />
+                    </StackPanel>
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Window>
